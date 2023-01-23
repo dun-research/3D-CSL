@@ -1,22 +1,22 @@
 # 3D-CSL: Self-supervised 3D Context Similarity Learning for Near-Duplicate Video Retrieval" 
 
-This is an official pytorch implementation of our paper "3D-CSL: Self-supervised 3D Context Similarity Learning for Near-Duplicate Video Retrieval" [arxiv link](https://arxiv.org/abs/2211.05352). In this repository, it provides code for the calulation of similarities between the query and database videos. Also, to facilitate the reproduction of the paper's results, the evaluation code and pre-trained weights are available.
+This is an official pytorch implementation of our paper "3D-CSL: Self-supervised 3D Context Similarity Learning for Near-Duplicate Video Retrieval" [arxiv link](https://arxiv.org/abs/2211.05352). This repository provides code for calculating similarities between the query and database videos. Also, the evaluation code and pre-trained weights are available to facilitate the reproduction of the paper's results.
 
 
 
 ## Installation
 Requirements
  + python 3.6+
- + torch 1.7.1
- + (optional) mmcv and mmaction2
+ + torch==1.7.1
+ + (optional) mmcv==1.5.2 and mmaction2==0.24.0
 
 You can install all the dependencies by 
 ```
     pip install -r requirements.txt
 ```
 
-We also provide a distributed version for evaluation, which requires additional installation of mmcv and mmaction.
-Please follow the official instruction to install, [mmcv](https://github.com/open-mmlab/mmcv) and [mmaction](https://github.com/open-mmlab/mmaction2)
+We also provide a distributed script for evaluation, which requires additional installation of mmcv and mmaction.
+Please follow the official instruction to install, [mmcv](https://github.com/open-mmlab/mmcv) and [mmaction2](https://github.com/open-mmlab/mmaction2)
 
 ## Evaluation
 We provide code and pretrained weights to reproduce the experiments in the paper.
@@ -37,13 +37,13 @@ We provide code and pretrained weights to reproduce the experiments in the paper
   
 
 ### Run Evaluation
-+ **Pretrained Weight**
++ **Pretrained Weights**
   + You can download the pretrained model on [Google Drive](https://drive.google.com/drive/folders/1Zd01H2dwewE3FzjF46Kc80icHEbcArCI?usp=sharing) or [Baidu Yun](https://pan.baidu.com/s/1kwfxqmZmwnlY_WagR58KlA)(password: jmnb).
   + After setup data and weights, you can use the following scripts to evaluate fivr-5k dataset:
   + To reproduce the reported results of paper, please switch to "fivr-200k" or "cc_web_video" dataset. The annotation files of these datasets can be found on [Google Drive](https://drive.google.com/drive/folders/1Zd01H2dwewE3FzjF46Kc80icHEbcArCI?usp=sharing) or [Baidu Yun](https://pan.baidu.com/s/1kwfxqmZmwnlY_WagR58KlA)(password: jmnb).
 
 ```
-    # run model in single gpu
+    # run model on single gpu
     python run_eval.py \
         --model base \
         --weights checkpoints/best_model_base_224_16x16_rgb.pth \
@@ -51,11 +51,11 @@ We provide code and pretrained weights to reproduce the experiments in the paper
         --out_file outputs/similarity.json \
         --topk-cs
 
-    # run model in multiple gpus
+    # run model on multiple gpus, requires mmcv and mmaction2
     python -m torch.distributed.launch --nproc_per_node 8  \
           run_eval_dist.py \ 
           --model base  \
-          --weights checkpoints/best_model_small_224_16x16_rgb.pth   \
+          --weights checkpoints/best_model_base_224_16x16_rgb.pth   \
           --dataset fivr-5k  \
           --out  outputs/test_3dcsl_base -la pytorch \
           --topk-cs 
@@ -64,7 +64,7 @@ We provide code and pretrained weights to reproduce the experiments in the paper
 
 
 ## Use 3D-CSL to extract video features
-3D-CSL is well trained video feature extractor that provides cost-effective clip-level features for video retrieval. Here is toy example that extracts features for any videos.
+3D-CSL is a well-trained video feature extractor that provides cost-effective clip-level features for video retrieval. Here is a toy example that extracts features for any videos.
 
 ```python
     import torch
@@ -80,7 +80,7 @@ We provide code and pretrained weights to reproduce the experiments in the paper
 
 
 ## Citation
-If this code is helpful for your work, please cite our paper
+If this code is helpful for your work, please cite our paper.
 ```
     @article{deng20223d,
     title={3D-CSL: self-supervised 3D context similarity learning for Near-Duplicate Video Retrieval},
@@ -91,9 +91,10 @@ If this code is helpful for your work, please cite our paper
 ```
 
 ## License
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Contact us for further details
-The code for training is not included in this repository. We cannot release the training code publicly for IP reasons. 
-If you need the training code or have any questions, please get in touch with the following email address:
+The code for training is not included in this repository. We can not release the training code publicly for IP reasons. 
+
+If you need the training code or have any questions, please contact us with the following email address:
 [dengrui01@corp.netease.com]()
