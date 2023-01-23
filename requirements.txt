@@ -1,0 +1,6 @@
+torch==1.7.1
+torchvision==0.8.2
+tqdm==4.61.2
+einops==0.4.1
+opencv-python==4.2.0.32
+numpy==1.20.3
