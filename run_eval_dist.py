@@ -1,4 +1,3 @@
-# Copyright (c) OpenMMLab. All rights reserved.
 import argparse
 import os
 import os.path as osp
@@ -6,22 +5,13 @@ import warnings
 from time import time
 import mmcv
 import torch
-from mmcv import Config, DictAction
-from mmcv.cnn import fuse_conv_bn
-from mmcv.fileio.io import file_handlers
-from mmcv.runner import get_dist_info, init_dist, load_checkpoint
-from mmcv.runner.fp16_utils import wrap_fp16_model
-
-from mmaction.datasets import build_dataloader, build_dataset
-
+from mmcv import Config
+from mmcv.runner import get_dist_info, init_dist
+from mmaction.datasets import build_dataloader
 from mmaction.utils import (build_ddp, build_dp, default_device,
-                            register_module_hooks, setup_multi_processes)
+                            setup_multi_processes)
 from mmaction.apis.test import collect_results_cpu, collect_results_gpu
-import numpy as np
 
-
-
-# TODO import test functions from mmcv and delete them from mmaction2
 try:
     from mmcv.engine import multi_gpu_test, single_gpu_test
 except (ImportError, ModuleNotFoundError):
@@ -173,28 +163,27 @@ def setup_env(args):
     setup_multi_processes(cfg)
 
 
-    # Load output_config from cfg
+    # load output_config from cfg
     output_config = cfg.get('output_config', {})
     if args.out:
-        # Overwrite output_config from args.out
+        # overwrite output_config from args.out
         out_file = osp.join(args.out, "prediction.pkl")
         output_config = Config._merge_a_into_b(
             dict(out=out_file), output_config)
         os.makedirs(args.out, exist_ok=True)
 
-    # Load eval_config from cfg
+    # load eval_config from cfg
     eval_config = cfg.get('eval_config', {})
 
     assert output_config or eval_config, \
         ('Please specify at least one operation (save or eval the '
-         'results) with the argument "--out" or "--eval"')
+         'results) with the argument "--out" ')
 
 
     # set cudnn benchmark
     if cfg.get('cudnn_benchmark', False):
         torch.backends.cudnn.benchmark = True
 
-    # init distributed env first, since logger depends on the dist info.
     if args.launcher == 'none':
         distributed = False
     else:
