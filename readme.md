@@ -1,6 +1,6 @@
-# 3D-CSL: Self-supervised 3D Context Similarity Learning for Near-Duplicate Video Retrieval" 
+# 3D-CSL: Self-supervised 3D Context Similarity Learning for Near-Duplicate Video Retrieval
 
-This is an official pytorch implementation of our paper "3D-CSL: Self-supervised 3D Context Similarity Learning for Near-Duplicate Video Retrieval" [arxiv link](https://arxiv.org/abs/2211.05352). This repository provides code for calculating similarities between the query and database videos. Also, the evaluation code and pre-trained weights are available to facilitate the reproduction of the paper's results.
+This is an official pytorch implementation of paper ["3D-CSL: Self-supervised 3D Context Similarity Learning for Near-Duplicate Video Retrieval"](https://arxiv.org/abs/2211.05352). This repository provides code for calculating similarities between the query and database videos. Also, the evaluation code and pretrained weights are available to facilitate the reproduction of the paper's results.
 
 
 
@@ -26,10 +26,10 @@ We provide code and pretrained weights to reproduce the experiments in the paper
 + **Video Download**
 
   + In order to download the datasets, you can follow the official guidelines. 
-  + Now the supported datasets are: [FIVR-200K](https://github.com/MKLab-ITI/FIVR-200K) and [CC_WEB_VIDEO](http://vireo.cs.cityu.edu.hk/webvideo/).
+  + Currently supported datasets are: [FIVR-200K](https://github.com/MKLab-ITI/FIVR-200K) and [CC_WEB_VIDEO](http://vireo.cs.cityu.edu.hk/webvideo/).
 
 + **Annotation File**
-  + We use three files to organize the video relationships for each dataset like [Visil](https://github.com/MKLab-ITI/visil).
+  + We use three files to organize the video relationships for each dataset following [Visil](https://github.com/MKLab-ITI/visil).
   + query_file: paths to file that contains the query videos, see example in [fivr-5k-queries.txt](data/fivr-5k-queries.txt)
   + database_file: paths to file that contains the database videos, see example in [fivr-5k-database.txt](data/fivr-5k-database.txt)
   + ann_file: relationship of query and database video, see example in [fivr.pkl](data/fivr.pkl)
@@ -64,7 +64,7 @@ We provide code and pretrained weights to reproduce the experiments in the paper
 
 
 ## Use 3D-CSL to extract video features
-3D-CSL is a well-trained video feature extractor that provides cost-effective clip-level features for video retrieval. Here is a toy example that extracts features for any videos.
+3D-CSL is a well-trained video feature extractor that provides computation-effective clip-level features for video retrieval. Below is a toy example that extracts features for any videos.
 
 ```python
     import torch
